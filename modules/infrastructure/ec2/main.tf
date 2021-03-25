@@ -1,20 +1,22 @@
 resource "aws_instance" "kube-vm" {
    ami                         = "${var.ami_id}"
-   instance_type               = "t2.micro"
+   key_name                    = "jenkins"
+   instance_type               = "t2.medium"
    subnet_id                   = "${var.public_subnet_id}"
    associate_public_ip_address = true
 
  tags = {
-    Name = "${var.environment}-${var.region}-Public"
+    Name = "${var.environment}-${var.region}-kube-vm"
   }
 }
 resource "aws_instance" "jenkin" {
    ami                         = "${var.ami_id}"
-   instance_type               = "t2.micro"
+   key_name                    = "sigma"
+   instance_type               = "t2.medium"
    subnet_id                   = "${var.private_subnet_id}"
    associate_public_ip_address = true
 
  tags = {
-    Name = "${var.environment}-${var.region}-Private"
+    Name = "${var.environment}-${var.region}-jenkins"
   }
 }
